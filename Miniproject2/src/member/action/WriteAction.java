@@ -1,0 +1,55 @@
+package member.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.control.CommandProcess;
+import com.sun.xml.internal.bind.v2.runtime.Name;
+
+import memberjsp.bean.MemberjspDTO;
+import memberjsp.dao.MemberjspDAO;
+
+
+public class WriteAction implements CommandProcess {
+
+	
+
+	@Override
+	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+		//데이터
+		String name = request.getParameter("name");
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
+		String gender = request.getParameter("gender");
+		String email1 = request.getParameter("email1");
+		String email2 = request.getParameter("email2");
+		String tel1 = request.getParameter("tel1");
+		String tel2 = request.getParameter("tel2");
+		String tel3 = request.getParameter("tel3");
+		String zipcode = request.getParameter("zipcode");
+		String addr1 = request.getParameter("addr1");
+		String addr2 = request.getParameter("addr2");
+		
+		MemberjspDTO memberDTO = new MemberjspDTO();
+		memberDTO.setName(name);
+		memberDTO.setId(id);
+		memberDTO.setPwd(pwd);
+		memberDTO.setGender(gender);
+		memberDTO.setEmail1(email1);
+		memberDTO.setEmail2(email2);
+		memberDTO.setTel1(tel1);
+		memberDTO.setTel2(tel2);
+		memberDTO.setTel3(tel3);
+		memberDTO.setZipcode(zipcode);
+		memberDTO.setAddr1(addr1);
+		memberDTO.setAddr2(addr2);
+		//DB
+		MemberjspDAO memberDAO = MemberjspDAO.getInstance();
+		int cnt= memberDAO.write(memberDTO);
+		//응답
+		request.setAttribute("cnt", cnt);
+		request.setAttribute("display", "/member/write.jsp");
+		return "/main/index.jsp";
+	}
+
+}

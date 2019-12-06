@@ -1,0 +1,13 @@
+@charset "UTF-8";
+#displayArea{
+	width: 200px;
+	height: 200px;
+	border-color: blue;
+	border-style: double;
+}
+#gugudan{
+	width: 300px;
+	height: 300px;
+	border-color: green;;
+	border-style: double;
+}

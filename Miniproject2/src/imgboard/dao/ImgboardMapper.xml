@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="imgSQL">
+
+	<!--상품등록  -->
+	<insert id="imgwrite" parameterType="imgboard">
+		insert into imageboard values 
+		(seq_imageboard.nextval, #{imageId}
+		, #{imageName}, #{imagePrice}, #{imageQty}
+		, #{imageContent}, #{image1}, sysdate)
+	</insert>
+	
+	<!--상품전체 개수  -->
+	<select id="imgboardtotalA" resultType="int">
+		select count(*) from imageboard
+	</select>
+	
+	<!--이미지 목록 게시판  -->
+	<select id="getimgboardList" parameterType="java.util.Map" resultType="imgboard">
+	<!-- 		select * from(select rownum rn,tt.*from 
+		(select seq,imageId,image1,imageName,imagePrice,
+		imageQty,to_char(logtime,'YYYY.MM.DD')as logtime 
+		from imageboard order by logtime)tt) where rn between #{startNum}  and #{endNum} -->
+		<![CDATA[
+		select * from (select rownum rn, tt.* from 
+		(select seq, imageid, imagename, imageprice, imageqty, imagecontent, image1, 
+		to_char(logtime, 'YYYY-MM-DD') as logtime from imageboard order by seq desc) 
+		tt) where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+		
+	</select>
+	
+	<!--상품보기 -->
+	<select id="imgboardview" parameterType="int" resultType="imgboard">
+		select * from imageboard where seq=#{seq}
+	</select>
+	
+	<!-- 삭제 -->
+	<!--배열안되서 맵을 보내 받음  -->
+	<!-- #{check[i]} -->
+	
+	<delete id="imgboardDelete" parameterType="java.util.Map">
+		delete imageboard where seq in
+		<foreach collection="check" item="seq" index="i" open="(" close=")" separator=",">
+		#{seq}
+		</foreach>
+	</delete>
+</mapper>

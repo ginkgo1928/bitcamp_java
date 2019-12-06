@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.container{
+position: absolute;
+top: 10px;
+left: 100px;
+height: 300px;
+width: 600px;
+border: 1px dotted green;
+font-size: 10px;
+}
+</style>
+</head>
+<body>
+<a id="wellcome" href="javascript:void(0)">처음화면</a>
+<br>
+<a id="semple" href="#">샘플 화면</a><br>
+<div id="result" class="container" style="font-size:20px;"></div>
+</body>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	//result.innerText='왼쪽메뉴를 선택하세요';
+	$('#result').text("왼쪽메뉴를 선택하세요");
+	$('#wellcome').click(function() {
+		$('#result').text("wellocome");
+		$('#result').css("color","red");
+		$('#result').css("font-size","50pt");
+		$('#result').css("font-weight","bold");
+	});
+	$("#semple").click(function () {
+		$("#result").removeAttr('style');
+		$('#result').load('sample.txt');
+	});
+});
+</script>
+</html>

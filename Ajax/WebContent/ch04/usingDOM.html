@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<span id="a">a</span>
+<p>
+ tset<span id="b"></span>
+</p>
+<div>
+<p>p</p>
+<span id="c">c</span>
+</div>
+
+<div id="debugConsole" style="border: 1px solid blue;"/>
+</body>
+<script type="text/javascript" src="log.js"></script>
+<script type="text/javascript">
+window.onload=function(){
+	var rootNode=document.documentElement;
+	log("root태크:"+rootNode.tagName);
+	
+	var bodyNode=document.getElementsByTagName("body").item(0);
+	log("body태크"+bodyNode.tagName);
+	
+	var spanList=document.getElementsByTagName("span");
+	log("span 개수"+spanList.length);
+	
+	for(var i=0; i<spanList.length; i++){
+		var span=spanList.item(i);
+		log((i+1)+"번째 span의 id:"+ span.getAttribute("id"));
+	}
+	var debugConsoleDiv=document.getElementById("debugConsole");
+	log("debugConsole 요소"+debugConsoleDiv.tagName);
+	
+	var bodyLastChild=bodyNode.lastChild; //text (div를 맊아야 바꿈), 대부분 첫번째를 많이 쓴다.
+	log("body의 마지막 자식 노드"+bodyLastChild.nodeName)
+}
+</script>
+</html>

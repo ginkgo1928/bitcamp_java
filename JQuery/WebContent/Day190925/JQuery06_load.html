@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+table {
+	border:blue  1px solid; 
+	/* padding: 0 0 0 0; */
+	padding: 0;
+}
+th{
+background-color: orange;
+width: 100px;
+border: green 1px solid;
+/* padding: 10px 0 10px 0; */ /*top right bottem left  */
+/* padding: 10px 0px; /*(top,bottem)(right,left) */ 
+padding-top: 10px;
+padding-bottom: 0px;
+}
+td{
+width: 100px;
+border: green 1px solid;
+padding:0 0 0 0;
+text-align: center;
+}
+
+</style>
+</head>
+<body>
+<p style="font-size: 20px">sample.txt파일 가져오기</p>
+<button id="b1">제목</button>&nbsp;&nbsp;
+<button id="b2">내용</button><br><br>
+<table>
+<tr id="div1"></tr>
+<tr id="div2"></tr>
+</table>
+</body>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#b1').click(function () {
+		
+		$('#div1').load('sample.txt #key');
+	});
+	
+	$('#b2').click(function() {
+		//클래스 속성(.)
+		$('#div2').load('sample.txt .value');
+		
+		
+	});
+});
+	
+</script>
+</html>

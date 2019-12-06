@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="demo2">
+    <button>add</button>
+    <ul>
+        <li>test1</li>
+        <li>test2</li>
+        <li>test3</li>
+    </ul>
+</div>
+
+</body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#demo2 li').bind('click',function(){
+		alert($(this).text());
+	});
+	
+	/* 	//비동적
+	$('#demo2 button').bind('click',function(){
+		//댓글한테 이벤트 처리 안되듯 얘네들도 이벤트 처리가 안됨
+		$('#demo2 ul').append('<li>비동적이벤트</li>');
+	}); */
+	//동적
+	$('#demo2 button').bind('click',function(){
+		$('#demo2 ul').unbind('click'); //모든 이벤트 제거
+		$('#demo2 ul').append('<li>이벤트 추가</li>').find($('li')).click(function(){}); //내가 원하는걸 찾아서 클릭 이벤트 걸어줌
+		alert($(this).text());
+	});
+});
+</script>
+</html>

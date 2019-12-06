@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button id="btn">데이터 불러오기</button>
+<br><br>
+</body>
+<div id="display"></div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btn').click(function(){
+		$.getJSON('jQueryAJax05_jsonData.txt',function(data){
+			$('#display').empty(); //데이블이 없을 떼 지우는 방법
+			var table="<table border=1>"
+					+"<tr>"
+					+"<th width=80>index</th>"
+					+"<th width=80>이름</th>"
+					+"<th width=80>주소</th>"
+					+"</tr>";
+			$.each(data,function(index,value){
+				table+="<tr>"
+					+"<td align=center>"+index+"</td>"
+					+"<td align=center>"+value.name+"</td>"
+					+"<td align=center>"+value.addr+"</td>"	
+			});		+"</tr>";
+			table+="</table>";
+			$('#display').append(table);		
+			
+		});
+	});
+});
+</script>
+</html>

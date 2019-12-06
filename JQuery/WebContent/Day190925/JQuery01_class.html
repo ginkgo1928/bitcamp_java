@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p class="">빨강</p>
+<p class="">초록</p>
+<p class="">파랑</p>
+<p class="">보라</p>
+</body>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var i=1;
+	$('p').each(function(){
+		$(this).addClass('s'+i);
+		i=i+1
+		if(i==3) return false;
+	});
+	
+});
+</script>
+</html>

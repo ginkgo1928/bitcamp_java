@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="userSQL">
+	<resultMap type="user" id="userResult">
+	<result property="name" column="NAME"/>
+	<result property="id" column="ID"/>
+	<result property="pwd" column="PWD"/>
+	</resultMap>
+	
+	<insert id="write" parameterType="user">
+		insert into usertable values(#{name},#{id},#{pwd})
+	</insert>
+	
+	<delete id="delete" parameterType="user">
+	 delete from usertable where id = #{id}
+	</delete>
+	
+	<select id="getList" resultType="user" resultMap="userResult">
+		select * from usertable
+	</select>
+	
+ 	<select id="searchid"  parameterType="String" resultType="user">
+		select id, name, pwd from usertable  where id = #{id}
+	</select>
+	
+	<update id="update" parameterType="java.util.Map">
+		update usertable set name=#{name}, pwd=#{pwd} where id=#{id}
+	</update>
+	
+	
+	<select id="search"  parameterType="java.util.Map" resultType="user">
+	<!--#{columName} 안됨 ? 라서  -->
+	<!-- select * from usertable where name like '%'||#{name}||'%' and id like||'%'#{id}||'%' -->
+	<!-- select * from  usertable where ${columnName} like '%'||#{value}||'%' -->
+   <!-- 	select * from usertable 
+	<if test="columnName=='name'">
+	where name like '%'||#{value}||'%'
+	</if>
+	
+	<if test="columnName=='id'">
+	where  id like '%'||#{value}||'%'
+	</if> -->
+	select * from usertable
+	<choose>
+	 <when test="columnName=='name'">
+	 where name like '%'||#{value}||'%'
+	 </when>
+	 <otherwise>
+	 where id like '%'||#{value}||'%'
+	 </otherwise>
+	</choose>
+</select>
+</mapper>
